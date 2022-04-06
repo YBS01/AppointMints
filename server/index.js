@@ -3,11 +3,11 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors  from 'cors'
 
-import postRoutes from './routes/posts.js'
+import appointmentRoutes from './routes/appointments.js'
 
 const app = express()
 
-app.use('/posts', postRoutes)
+app.use('/appointments', appointmentRoutes)
 
 
 app.use(bodyParser.json({limit: "30mb", extended: true}))
