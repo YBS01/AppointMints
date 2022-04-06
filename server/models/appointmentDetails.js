@@ -1,14 +1,14 @@
 import mongoose from "mongoose"
 
-const appointmentSchema = mongoose.Schema({
-    appointmentID: int,
-    appointmentTitle: String,
-    appointmentDescription: String,
-    memberID: int,
-    employeeID: int,
-    appointmentDate: Date,  
+const appoNumbermentSchema = mongoose.Schema({
+    appoNumbermentID: Number,
+    appoNumbermentTitle: String,
+    appoNumbermentDescription: String,
+    memberID: Number,
+    employeeID: Number,
+    appoNumbermentDate: Date,  
 })
 
-const AppointmentDetails = mongoose.model('AppointmentDetails', appointmentSchema)
+const AppoNumbermentDetails = mongoose.model('AppoNumbermentDetails', appoNumbermentSchema)
 
-export default AppointmentDetails
+export default AppoNumbermentDetails
