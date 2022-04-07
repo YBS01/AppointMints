@@ -1,14 +1,25 @@
 import mongoose from "mongoose"
 
-const appoNumbermentSchema = mongoose.Schema({
-    appoNumbermentID: Number,
-    appoNumbermentTitle: String,
-    appoNumbermentDescription: String,
-    memberID: Number,
-    employeeID: Number,
-    appoNumbermentDate: Date,  
+const appointmentSchema = mongoose.Schema({
+    appointmentID: Number,               //
+    memberID: Number,                    //
+    memberTitle: String,                 //tittle
+    memberName: String,                  //tittle
+    memberEmail: String,                 //creator
+    appointmentDate: Date,               //add date below title field
+    appointmentDescription: String,      //message
+    employeeAvailable: {                 //likeCount
+        type: Number,
+        default: 0,
+    },
+    tags: [String],                      //
+    createdAt: {
+        type: Date,
+        default: new Date(), 
+    },                       
+    employeeID: Number,                  //
 })
 
-const AppoNumbermentDetails = mongoose.model('AppoNumbermentDetails', appoNumbermentSchema)
+const AppointmentDetails = mongoose.model('AppointmentDetails', appointmentSchema)
 
-export default AppoNumbermentDetails
+export default AppointmentDetails

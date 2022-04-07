@@ -1,10 +1,14 @@
 import React from 'react'
 import Appointment from './Appointment/Appointment'
+import { useSelector } from 'react-redux'
 
 import useStyles from './styles'
 
 const Appointments = () => {
+    const appointments = useSelector((state) => state.appointments)
     const classes = useStyles()
+
+    console.log(appointments)
     return (
         <>
             <h1>APPOINTMENTS</h1>
