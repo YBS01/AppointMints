@@ -8,6 +8,7 @@ const appointmentSchema = mongoose.Schema({
     memberEmail: String,                 //creator
     appointmentDate: Date,               //add date below title field
     appointmentDescription: String,      //message
+    selectedFile: String,
     employeeAvailable: {                 //likeCount
         type: Number,
         default: 0,
