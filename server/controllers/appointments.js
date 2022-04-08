@@ -24,3 +24,14 @@ export const createAppointment = async (req, res) => {
         res.status(409).json({message: error.message})
     }
 }
+
+export const updateAppointment = async (req, res) => {
+    const { id: _id } = req.params
+    const appointment = req.body
+    
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No appointment with that id')
+
+    const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(_id, appointment, { new: true })
+
+    res.json(updatedAppointment)
+}

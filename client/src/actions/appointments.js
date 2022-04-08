@@ -21,3 +21,12 @@ export const createAppointment = (appointment) => async (dispatch) => {
         console.log(error.message)
     }
 }
+
+export const updateAppointment = (id, appointment) => async (dispatch) => {
+    try {
+        const { data } = await api.updateAppointment(id, appointment)
+        dispatch({ type: 'UPDATE', payload: data })
+    } catch (error) {
+        console.log(error.message)
+    }
+}
