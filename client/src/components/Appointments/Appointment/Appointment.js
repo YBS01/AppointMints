@@ -22,7 +22,8 @@ const Appointment = ({ appointment }) => {
                 </Button>
             </div>
             <div className={classes.details}>
-                <Typography variant='body2' color='textSecondary'>{appointment.tags.map((tag) => `#${tag} `)}</Typography>
+                <Typography variant='body2' color='textSecondary'>{/*{appointment.tags.map((tag) => `#${tag} `)}*/} #hello, #hey</Typography>
+            </div>
                 <CardContent>                    
                     <Typography className={classes.title} variant='h5' gutterBottom>{appointment.appointmentDescription}</Typography>
                 </CardContent>
@@ -37,7 +38,6 @@ const Appointment = ({ appointment }) => {
                         Delete
                     </Button>
                 </CardActions>
-            </div>
         </Card>
     )
 }
