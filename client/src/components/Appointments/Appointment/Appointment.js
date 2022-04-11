@@ -21,7 +21,7 @@ const Appointment = ({ appointment, setCurrentId }) => {
                 <Button 
                 style={{color: 'white'}} 
                 size='small' 
-                onClick={() => setCurrentId(appointment._Id)}> {/*chech for curly vs regular*/}
+                onClick={() => setCurrentId(appointment._id)}> {/*chech for curly vs regular*/}
                     <MoreHorizIcon fontSize='medium'/>
                 </Button>
             </div>
