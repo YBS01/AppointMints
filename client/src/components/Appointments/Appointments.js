@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 import useStyles from './styles'
 
-const Appointments = ({setCurrentId}) => {
+const Appointments = ({ setCurrentId }) => {
     const appointments = useSelector((state) => state.appointments)
     const classes = useStyles()
 

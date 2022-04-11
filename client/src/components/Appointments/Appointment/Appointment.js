@@ -21,7 +21,7 @@ const Appointment = ({ appointment, setCurrentId }) => {
                 <Button 
                 style={{color: 'white'}} 
                 size='small' 
-                onClick={() => setCurrentId=appointment._Id}>
+                onClick={() => setCurrentId(appointment._Id)}> {/*chech for curly vs regular*/}
                     <MoreHorizIcon fontSize='medium'/>
                 </Button>
             </div>
@@ -36,7 +36,7 @@ const Appointment = ({ appointment, setCurrentId }) => {
                     <Button size='small' color='primary' onClick={() => {} }>
                         <ThumbUpAltIcon fontSize='small' />
                         Employee Available
-                        {appointment.mployeeAvailable}
+                        {appointment.employeeAvailable}
                     </Button>
                     <Button size='small' color='primary' onClick={() => {} }>
                         <DeleteIcon fontSize='small' />

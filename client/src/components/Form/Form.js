@@ -20,7 +20,7 @@ const Form = (currentId, setCurrentId) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(appointment) setAppointmentData(appointment)
+        if(appointment) setAppointmentData(appointment);
     }, [appointment])
 
 

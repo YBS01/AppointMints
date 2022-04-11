@@ -27,6 +27,6 @@ export const updateAppointment = (id, appointment) => async (dispatch) => {
         const { data } = await api.updateAppointment(id, appointment)
         dispatch({ type: 'UPDATE', payload: data })
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message) 
     }
 }
