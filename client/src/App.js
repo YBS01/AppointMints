@@ -9,7 +9,6 @@ import Form from './components/Form/Form'
 import appointmints from './images/appointmints.png'
 import useStyles from './styles'
 
-
 const App = () => {
     const [currentId, setCurrentId] = useState(null)
     const classes = useStyles()
