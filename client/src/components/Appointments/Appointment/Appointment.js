@@ -7,7 +7,7 @@ import moment from 'moment'
 
 import useStyles from './styles'
 
-const Appointment = ({ appointment }) => {
+const Appointment = ({ appointment, setCurrentId }) => {
     const classes = useStyles()
     return (
         <Card className={classes.card}>
@@ -17,7 +17,10 @@ const Appointment = ({ appointment }) => {
                 <Typography variant='body2'>{moment(appointment.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{color: 'white'}} size='small' onClick={() => {}}>
+                <Button 
+                style={{color: 'white'}} 
+                size='small' 
+                onClick={() => setCurrentId(appointment._id)}>
                     <MoreHorizIcon fontSize='medium'/>
                 </Button>
             </div>

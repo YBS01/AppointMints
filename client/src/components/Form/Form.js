@@ -1,24 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TextField, Button, Typography, Paper} from '@material-ui/core'
 import Filebase from 'react-file-base64'
 import { useDispatch } from 'react-redux'
 
 
 import useStyles from './styles'
+import { useSelector } from 'react-redux'
+
 //import { createAppointment } from '../../api'
-import { createAppointment } from '../../actions/appointments'
+import { createAppointment, updateAppointment } from '../../actions/appointments'
+//import { updateAppointment } from '../../../../server/controllers/appointments'
 
-const Form = () => {
-    const classes = useStyles()
-    const dispatch = useDispatch()
-
+const Form = ({ currentId, setCurrentId }) => {
+    
     const [appointmentData, setAppointmentData] = useState({
         memberTitle: '', memberName: '', memberEmail: '', appointmentDate: '', appointmentDescription: '' })
+        
+        const appointment = useSelector((state) => currentId ? state.appointments.find((p) => p._id === currentId) : null)        
+        const classes = useStyles()
+        const dispatch = useDispatch()
+
+        useEffect(() => {
+            if(appointment) setAppointmentData(appointment);
+        }, [appointment] )
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createAppointment(appointmentData))
+        if(currentId) {
+            dispatch(updateAppointment(currentId, appointmentData))
+
+        } else {
+            dispatch(createAppointment(appointmentData))
+        }
+
     }
 
     const clear = () => {
