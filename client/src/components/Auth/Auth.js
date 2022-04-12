@@ -4,6 +4,8 @@ import useStyles from './styles'
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined'
 import Input from './input'
 import { useState } from 'react'
+import { GoogleLogin } from 'react-google-login'
+import Icon from './icon'
 
 const Auth = () => {
     const classes = useStyles()
@@ -25,6 +27,16 @@ const Auth = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup )
         handleShowPassword(false)
     }
+
+    const googleSuccess = async (res) => {
+        console.log(res)
+    }
+
+    const googleFailure = (error) => {
+        console.log(error)
+        console.log('Google Sign In was unsuccessful')
+    }
+
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -51,8 +63,23 @@ const Auth = () => {
                 <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}> 
                     {isSignup ? 'Sign Up' : 'Sign In'}
                 </Button>
-                <Grid container justify='flex-end'>
+                <Grid container justifyContent='flex-end'>
                     <Grid item>
+                        <GoogleLogin 
+                        clientId='980243985638-h5g1kut3mkcf7otk877hfts0aj0m8aoq.apps.googleusercontent.com'
+                        render={(renderProps) => 
+                            <Button 
+                            className={classes.googleButton} 
+                            color='primary' 
+                            fullWidth 
+                            onClick={renderProps.onClick} 
+                            disabled={renderProps.disabled} 
+                            startIcon={<Icon />} variant='contained' >Google Sign In </Button>
+                        } 
+                        onSuccess={googleSuccess}
+                        onFailure={googleFailure}
+                        cookiePolicy='single_host_origin'
+                        />
                         <Button onClick={switchMode} >
                             { isSignup ? 'Already have an account? Sign In' : 'Dont have an account? Sign Up'}
                         </Button>
