@@ -6,8 +6,9 @@ import { useEffect} from 'react'
 import { getAppointments } from './actions/appointments'
 import Appointments from './components/Appointments/Appointments'
 import Form from './components/Form/Form'
-import appointmints from './images/appointmints.png'
 import useStyles from './styles'
+import Navbar from './components/Navbar/Navbar'
+
 
 const App = () => {
     const [currentId, setCurrentId] = useState(null)
@@ -20,10 +21,7 @@ const App = () => {
 
     return (
         <Container maxWidth='lg'>
-            <AppBar className={classes.appBar} position='static' color='inherit'>
-                <Typography className={classes.heading} variant='h2' align='center'>AppointMints</Typography>
-                <img className={classes.image} src={appointmints} alt='AppointMints' height='60'/>
-            </AppBar>
+            <Navbar />
             <Grow in>
                 <Container>
                     <Grid container className={classes.mainContainer} justifyContent='space-between' alignItems='stretch' spacing={4}>
