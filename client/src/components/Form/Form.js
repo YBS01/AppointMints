@@ -91,6 +91,10 @@ const Form = ({ currentId, setCurrentId }) => {
                 onChange={(e) => setAppointmentData({...appointmentData, appointmentDescription: e.target.value})}
                 />
 
+                {/*<TextField name='tags' variant='outlined' label='Tags' fullWidth value={appointmentData.tags} onChange={(e) => setAppointmentData({...appointmentData, tags: e.target.value.split(',') })}>
+
+                </TextField>*/}
+
                 <div className={classes.fileInput}>
                     <Filebase 
                         type='file'

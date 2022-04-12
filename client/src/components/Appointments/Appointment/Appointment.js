@@ -28,18 +28,18 @@ const Appointment = ({ appointment, setCurrentId }) => {
                 </Button>
             </div>
             <div className={classes.details}>
-                <Typography variant='body2' color='textSecondary'>{/*{appointment.tags.map((tag) => `#${tag} `)}*/} #hello, #hey</Typography>
+                <Typography variant='body2' color='textSecondary'>{appointment.tags.map((tag) => `#${tag} `)}</Typography>
             </div>
                 <Typography className={classes.title} variant='h5' gutterBottom>{appointment.memberTitle} {appointment.memberName}</Typography>
-                <Typography className={classes.title} variant='h5' gutterBottom> { moment(appointment.appointmentDate).calendar() } </Typography>
+                <Typography className={classes.title} variant='h6' gutterBottom> { moment(appointment.appointmentDate).calendar() } </Typography>
                 <CardContent>                    
-                    <Typography variant='h5' gutterBottom>{appointment.appointmentDescription}</Typography>
+                    <Typography variant='body2' color='textSecondary' component='p' >{appointment.appointmentDescription}</Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions}>
                     <Button size='small' color='primary' onClick={() => dispatch(employeeAvailable(appointment._id)) }>
                         <ThumbUpAltIcon fontSize='small' />
-                        Employee Available
-                        {appointment.mployeeAvailable}
+                        Employee Available &nbsp;
+                        {appointment.employeeAvailable}
                     </Button>
                     <Button size='small' color='primary' onClick={() => dispatch(deleteAppointment(appointment._id)) }>
                         <DeleteIcon fontSize='small' />
