@@ -4,11 +4,14 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
 import DeleteIcon from '@material-ui/icons/Delete'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import moment from 'moment'
-
+import { useDispatch } from 'react-redux'
 import useStyles from './styles'
+import { deleteAppointment, employeeAvailable } from '../../../actions/appointments'
 
 const Appointment = ({ appointment, setCurrentId }) => {
     const classes = useStyles()
+    const dispatch = useDispatch()
+
     return (
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={appointment.selectedFile} title={appointment.memberTitle}/>
@@ -27,16 +30,18 @@ const Appointment = ({ appointment, setCurrentId }) => {
             <div className={classes.details}>
                 <Typography variant='body2' color='textSecondary'>{/*{appointment.tags.map((tag) => `#${tag} `)}*/} #hello, #hey</Typography>
             </div>
+                <Typography className={classes.title} variant='h5' gutterBottom>{appointment.memberTitle} {appointment.memberName}</Typography>
+                <Typography className={classes.title} variant='h5' gutterBottom> { moment(appointment.appointmentDate).calendar() } </Typography>
                 <CardContent>                    
-                    <Typography className={classes.title} variant='h5' gutterBottom>{appointment.appointmentDescription}</Typography>
+                    <Typography variant='h5' gutterBottom>{appointment.appointmentDescription}</Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions}>
-                    <Button size='small' color='primary' onClick={() => {} }>
+                    <Button size='small' color='primary' onClick={() => dispatch(employeeAvailable(appointment._id)) }>
                         <ThumbUpAltIcon fontSize='small' />
                         Employee Available
                         {appointment.mployeeAvailable}
                     </Button>
-                    <Button size='small' color='primary' onClick={() => {} }>
+                    <Button size='small' color='primary' onClick={() => dispatch(deleteAppointment(appointment._id)) }>
                         <DeleteIcon fontSize='small' />
                         Delete
                     </Button>

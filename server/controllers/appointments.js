@@ -32,7 +32,27 @@ export const updateAppointment = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No appointment with that id');
 
-    const updatedAppountment = await AppointmentDetails.findByIdAndUpdate(_id, appointment, { new: true });
+    
+    const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(_id, { ...appointment, _id}, { new: true });
 
-    res.json(updatedAppountment)
+    res.json(updatedAppointment)
+}
+
+export const deleteAppointment = async (req, res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No appointment with that id');
+
+    await AppointmentDetails.findByIdAndRemove(id)
+
+    res.json({ message: 'Appointment deleted successfully'})
+}
+
+export const employeeAvailable = async (req, res ) => {
+    const { id } = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No appointment with that id'); //trouble below vid2_46:46
+    const appointment = await AppointmentDetails.findById(id)
+    const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(id, { employeeAvailable: appointment.employeeAvailable + 1  }, { new: true })
+
+    res.json(updatedAppointment)
 }

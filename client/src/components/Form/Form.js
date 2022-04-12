@@ -33,10 +33,12 @@ const Form = ({ currentId, setCurrentId }) => {
             dispatch(createAppointment(appointmentData))
         }
 
+        clear()
     }
 
     const clear = () => {
-
+        setCurrentId(null)
+        setAppointmentData({memberTitle: '', memberName: '', memberEmail: '', appointmentDate: '', appointmentDescription: '' })
     }
     
     return (

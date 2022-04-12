@@ -17,7 +17,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(getAppointments())
-    }, [dispatch])
+    }, [currentId, dispatch])
 
     return (
         <Container maxWidth='lg'>
