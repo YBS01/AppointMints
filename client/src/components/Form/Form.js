@@ -29,7 +29,6 @@ const Form = ({ currentId, setCurrentId }) => {
 
         if(currentId) {
             dispatch(updateAppointment(currentId, appointmentData))
-
         } else {
             dispatch(createAppointment(appointmentData))
         }
@@ -43,7 +42,7 @@ const Form = ({ currentId, setCurrentId }) => {
     return (
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className= {`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant='h6'>Book an Appointment</Typography>
+                <Typography variant='h6'> {currentId ? 'Editing' : 'Book'} Appointment </Typography>
 
                 <TextField  
                 name='memberTitle' 
