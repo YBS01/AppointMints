@@ -6,6 +6,8 @@ import Input from './input'
 import { useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
 import Icon from './icon'
+import { useNavigate } from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 
 const Auth = () => {
     const classes = useStyles()
@@ -13,6 +15,9 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false)
 
     const [isSignup, setIsSignup] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword )
 
     const handleSubmit = () => {
@@ -29,7 +34,15 @@ const Auth = () => {
     }
 
     const googleSuccess = async (res) => {
-        console.log(res)
+        const result = res?.profileObj
+        const token = res?.tokenId
+
+        try {
+            dispatch({ type: 'AUTH', data: { result, token} })
+            navigate('/')
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const googleFailure = (error) => {
