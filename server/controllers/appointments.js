@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import AppointmentDetails from "../models/appointmentDetails.js"
+import router from "../routes/appointments.js"
 
 export const getAppointments = async (req, res) => {    
     try {
@@ -50,9 +51,26 @@ export const deleteAppointment = async (req, res) => {
 
 export const employeeAvailable = async (req, res ) => {
     const { id } = req.params
+
+    if (!req.userId) return res.json({ message : 'Unauthenticated' })
+
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No appointment with that id'); //trouble below vid2_46:46
+
     const appointment = await AppointmentDetails.findById(id)
-    const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(id, { employeeAvailable: appointment.employeeAvailable + 1  }, { new: true })
+
+    const index = appointment.available.findIndex((id) => id === String (req.userId))
+
+    if( index === -1) {
+        //add like
+        appointment.available.push(req.userId)
+    } else {
+        appointment.available = appointment.available.filter((id) => id !== String(req.userId))
+    }
+
+    // const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(id, { employeeAvailable: appointment.employeeAvailable + 1  }, { new: true })
+    const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(id, post, { new: true })
 
     res.json(updatedAppointment)
 }
+
+//export default router

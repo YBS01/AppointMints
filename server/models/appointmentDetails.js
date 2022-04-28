@@ -9,9 +9,9 @@ const appointmentSchema = mongoose.Schema({
     appointmentDate: Date,               //add date below title field
     appointmentDescription: String,      //message
     selectedFile: String,
-    employeeAvailable: {                 //likeCount
-        type: Number,
-        default: 0,
+    available: {                 //likeCount
+        type: [String],
+        default: [],
     },
     tags: [String],                      //
     createdAt: {

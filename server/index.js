@@ -5,6 +5,7 @@ import cors  from 'cors'
 import dotenv from 'dotenv'
 
 import appointmentRoutes from './routes/appointments.js'
+import userRoutes from './routes/users.js'
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
 app.use(cors())
 
 app.use('/appointments', appointmentRoutes)
+app.use('/user', userRoutes)
 
 //const CONNECTION_URL = 'mongodb+srv://AppointMe:WLMMeters24@cluster0.rndby.mongodb.net/AppointMints?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
