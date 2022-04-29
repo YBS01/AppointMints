@@ -16,7 +16,8 @@ const Appointment = ({ appointment, setCurrentId }) => {
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={appointment.selectedFile} title={appointment.memberTitle}/>
             <div className={classes.overlay}>   
-                <Typography variant='h6'>{appointment.memberEmail}</Typography>
+                {/* <Typography variant='h6'>{appointment.memberEmail}</Typography> */}
+                <Typography variant='h6'>{appointment.employee}</Typography>  {/* to use as creator*/}
                 <Typography variant='body2'>{moment(appointment.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>

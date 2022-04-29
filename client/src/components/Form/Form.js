@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux'
 import useStyles from './styles'
 import { useSelector } from 'react-redux'
 
+
 //import { createAppointment } from '../../api'
 import { createAppointment, updateAppointment } from '../../actions/appointments'
 //import { updateAppointment } from '../../../../server/controllers/appointments'
@@ -33,9 +34,14 @@ const Form = ({ currentId, setCurrentId }) => {
         const classes = useStyles()
         const dispatch = useDispatch()
 
+        //FOR NEW
+        const user = JSON.parse(localStorage.getItem('profile'))
+
         useEffect(() => {
             if(appointment) setAppointmentData(appointment);
         }, [appointment] )
+
+        // CHECK BACK FOR LOGIC
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -49,9 +55,31 @@ const Form = ({ currentId, setCurrentId }) => {
         clear()
     }
 
+    // NEW
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+
+    //     if(currentId === 0) {
+    //         dispatch(createAppointment({ ...appointmentData, employee: user?.result?.employee }))
+    //     } else {
+    //         dispatch(updateAppointment(currentId, { ...appointmentData, employee: user?.result?.employee } ))
+    //     }
+
+    //     clear()
+    // }
+
+
+    if (!user?.result?.name) {
+        <Paper className={classes.paper}>
+            <Typography variant='h6' align='center'>
+                Employees must login to view booked appointments
+            </Typography>
+        </Paper>
+    }
+
     const clear = () => {
         setCurrentId(null)
-        setAppointmentData({memberTitle: '', memberName: '', memberEmail: '', appointmentDate: '', appointmentDescription: '' })
+        setAppointmentData({memberTitle: '', memberName: '', memberEmail: '', appointmentDate: '', appointmentDescription: '' , employee: ''})
     }
     
     return (
@@ -64,10 +92,25 @@ const Form = ({ currentId, setCurrentId }) => {
       <Autocomplete fullWidth
         options={options}
         renderInput={(params) =>
-          <TextField {...params} label="Employee" variant="outlined" />}
+          <TextField {...params} name='employee' 
+          variant='outlined' 
+          label='Employee'
+          fullWidth //try to put on same line as previous element
+          value={appointmentData.employee}/>}
+          onChange={(e) => setAppointmentData({...appointmentData, employee: e.target.value})}
       />
     </div>        
 
+{/*                 
+                <TextField  
+                name='employee' 
+                variant='outlined' 
+                label='Employee'
+                fullWidth
+                value={appointmentData.memberEmail}
+                onChange={(e) => setAppointmentData({...appointmentData, memberEmail: e.target.value})}
+                /> */}
+                
                 <TextField  
                 name='memberTitle' 
                 variant='outlined' 
@@ -110,6 +153,8 @@ const Form = ({ currentId, setCurrentId }) => {
                 variant='outlined' 
                 label='Appointment Description'
                 fullWidth
+                multiline 
+                rows={4}
                 value={appointmentData.appointmentDescription}
                 onChange={(e) => setAppointmentData({...appointmentData, appointmentDescription: e.target.value})}
                 />
