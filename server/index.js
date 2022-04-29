@@ -6,8 +6,17 @@ import dotenv from 'dotenv'
 
 import appointmentRoutes from './routes/appointments.js'
 import userRoutes from './routes/users.js'
-
+// import twilio from 'twilio'
 const app = express()
+
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const client = ('twilio')('QDAFwabMCYdlCvbgOzxuEF4s5ImS6yQDCkLUvZK0', '9dfa536eece8ab717dbdbb71a3d0dbdb');
+
+// client.messages
+//       .create({from: '+16812498540', body: 'Hi there', to: '+12687753033'})
+//       .then(message => console.log(message.sid));
+
 
 dotenv.config()
 
