@@ -1,16 +1,35 @@
 import React from 'react'
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, } from '@material-ui/core'
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
+import EventAvailableIcon from '@material-ui/icons/EventAvailable'
+import EventAvailableTwoToneIcon from '@material-ui/icons/EventAvailableTwoTone'
+import EventBusy from '@material-ui/icons/EventBusy'
 import DeleteIcon from '@material-ui/icons/Delete'
+import EventBusyIcon from'@material-ui/icons/EventBusy'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
 import useStyles from './styles'
 import { deleteAppointment, employeeAvailable } from '../../../actions/appointments'
+import Appointments from '../Appointments'
 
 const Appointment = ({ appointment, setCurrentId }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
+    
+    const user = JSON.parse(localStorage.getItem('profile'))
+
+    const Availability = () => {
+        if (appointment.available.length > 0) {
+          return appointment.available.find((available) => available === (user?.result?.googleId || user?.result?._id))
+            ? (
+              <><EventAvailableIcon fontSize="small" />&nbsp;{appointment.available.length > 1 ? `You and ${appointment.available.length - 1} others` : `${appointment.available.length} you are available${appointment.available.length > 1 ? '' : ''}` }</>
+            ) : (
+              <><EventAvailableTwoToneIcon fontSize="small" />&nbsp;{appointment.available.length} {appointment.available.length === 1 ? 'Someone is available' : 'Multiple persons are available'}</>
+            );
+        }
+    
+        return <><EventBusyIcon fontSize="small" />&nbsp;No one is available</>;
+      };
 
     return (
         <Card className={classes.card}>
@@ -37,14 +56,12 @@ const Appointment = ({ appointment, setCurrentId }) => {
                     <Typography variant='body2' color='textSecondary' component='p' >{appointment.appointmentDescription}</Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions}>
-                    <Button size='small' color='primary' onClick={() => dispatch(employeeAvailable(appointment._id)) }>
-                        <ThumbUpAltIcon fontSize='small' />
-                        Employee Available &nbsp;
-                        {appointment.employeeAvailable}
+                    <Button size='small' color='primary' disabled={!user?.result} onClick={() => dispatch(employeeAvailable(appointment._id)) }>
+                       <Availability/>
                     </Button>
                     <Button size='small' color='primary' onClick={() => dispatch(deleteAppointment(appointment._id)) }>
                         <DeleteIcon fontSize='small' />
-                        Delete
+                        Cancel
                     </Button>
                 </CardActions>
         </Card>

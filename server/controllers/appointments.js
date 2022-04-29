@@ -71,7 +71,7 @@ export const employeeAvailable = async (req, res ) => {
     }
 
     // const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(id, { employeeAvailable: appointment.employeeAvailable + 1  }, { new: true })
-    const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(id, post, { new: true })
+    const updatedAppointment = await AppointmentDetails.findByIdAndUpdate(id, appointment, { new: true })
 
     res.json(updatedAppointment)
 }
