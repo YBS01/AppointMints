@@ -2,6 +2,14 @@ import axios from 'axios'
 
 const API = axios.create({ baseURL: 'http://localhost:5000' })
 
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem('profile')) {
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`
+    } 
+    
+    return req
+})
+
 export const fetchAppointments = () => API.get('/appointments')
 export const createAppointment = (newAppointment) => API.post('/appointments', newAppointment)
 export const updateAppointment = (id, updatedAppointment) => API.patch(`/appointments/${id}`, updatedAppointment)

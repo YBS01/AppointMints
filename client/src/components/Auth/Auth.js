@@ -34,8 +34,6 @@ const Auth = () => {
             dispatch(signin(formData))
             navigate('/') //moved from actions/auth
         }
-
-        navigate('/') //moved from actions/auth
     }
 
     const handleChange = (e) => {

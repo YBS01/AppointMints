@@ -17,7 +17,10 @@ export const getAppointments = async (req, res) => {
 export const createAppointment = async (req, res) => {
     const appointment = req.body
 
-    const newAppointment = new AppointmentDetails(appointment)
+    const newAppointment = new AppointmentDetails({ ...appointment, createdAt: new Date().toISOString()})
+    //const newAppointment = new AppointmentDetails({ ...appointment, employee: req.userId, createdAt: new Date().toISOString()})
+    //const newAppointment = new AppointmentDetails({ ...appointment, creator: req.userId, createdAt: new Date().toISOString()})
+    //const newAppointment = new AppointmentDetails(appointment)
 
     try {
         await newAppointment.save()

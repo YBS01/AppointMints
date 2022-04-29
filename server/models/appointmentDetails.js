@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 
 const appointmentSchema = mongoose.Schema({
     appointmentID: Number,               //
+    employee: String,                    //creator with features
     memberID: Number,                    //
     memberTitle: String,                 //tittle
     memberName: String,                  //tittle

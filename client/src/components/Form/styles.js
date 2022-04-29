@@ -9,6 +9,11 @@ export default makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
   },
+  autocomplete: {
+    marginLeft:'-2%', 
+    marginRight:'3.5%', 
+    width: 309
+  },
   form: {
     display: 'flex',
     flexWrap: 'wrap',
