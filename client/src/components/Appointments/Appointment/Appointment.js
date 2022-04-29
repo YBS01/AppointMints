@@ -2,10 +2,9 @@ import React from 'react'
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, } from '@material-ui/core'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import EventAvailableTwoToneIcon from '@material-ui/icons/EventAvailableTwoTone'
-import EventBusy from '@material-ui/icons/EventBusy'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EventBusyIcon from'@material-ui/icons/EventBusy'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import EditIcon from '@material-ui/icons/Edit'
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
 import useStyles from './styles'
@@ -33,9 +32,9 @@ const Appointment = ({ appointment, setCurrentId }) => {
 
     return (
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image={appointment.selectedFile} title={appointment.memberTitle}/>
+            <CardMedia className={classes.media} image= 'https://cdn.picpng.com/calendar/calendar-dates-schedule-date-42267.png' title={appointment.memberTitle}/>
             <div className={classes.overlay}>   
-                {/* <Typography variant='h6'>{appointment.memberEmail}</Typography> */}
+                <Typography variant='body1'>{appointment.memberEmail}</Typography>
                 <Typography variant='h6'>{appointment.employee}</Typography>  {/* to use as creator*/}
                 <Typography variant='body2'>{moment(appointment.createdAt).fromNow()}</Typography>
             </div>
@@ -44,7 +43,7 @@ const Appointment = ({ appointment, setCurrentId }) => {
                 style={{color: 'white'}} 
                 size='small' 
                 onClick={() => setCurrentId(appointment._id)}>
-                    <MoreHorizIcon fontSize='medium'/>
+                    <EditIcon fontSize='medium'/>
                 </Button>
             </div>
             <div className={classes.details}>

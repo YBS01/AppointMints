@@ -17,6 +17,7 @@ export const signin = (formData) => async (dispatch) => {
     } catch (error) {
         console.log(error)
     }
+    window.location.reload(false)
 }
 
 

@@ -29,11 +29,12 @@ const Auth = () => {
 
         if (isSignup) {
             dispatch(signup(formData))
-            navigate('/') //moved from actions/auth
+            // navigate('/') //moved from actions/auth
+            window.location.reload(false)
         } else {
             dispatch(signin(formData))
             navigate('/') //moved from actions/auth
-        }
+        }     
     }
 
     const handleChange = (e) => {

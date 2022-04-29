@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Button, Typography, Paper} from '@material-ui/core'
+import { TextField, Button, Typography, Paper, InputLabel, Select, FormControl, MenuItem } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import Filebase from 'react-file-base64'
 import DateMomentUtils from '@date-io/moment'
@@ -22,8 +22,6 @@ import { useSelector } from 'react-redux'
 import { createAppointment, updateAppointment } from '../../actions/appointments'
 //import { updateAppointment } from '../../../../server/controllers/appointments'
 
-const options = ['Jane Doe', 'John Doe', 'Janet Doe', 
-'Justin Case', 'April May']
 
 const Form = ({ currentId, setCurrentId }) => {
     
@@ -79,43 +77,42 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const clear = () => {
         setCurrentId(null)
-        setAppointmentData({memberTitle: '', memberName: '', memberEmail: '', appointmentDate: '', appointmentDescription: '' , employee: ''})
+        setAppointmentData({memberTitle: '', memberName: '', memberEmail: '', appointmentDate: new Date().getFullYear(), appointmentDescription: '' , employee: ''})
     }
     
     return (
         <Paper className={classes.paper}>
-            <form autoComplete='off' noValidate className= {`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+            <form autoComplete='off' className= {`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant='h6'> {currentId ? 'Editing' : 'Book'} Appointment </Typography>
-                
 
-                <div className={classes.autocomplete}>
-      <Autocomplete fullWidth
-        options={options}
-        renderInput={(params) =>
-          <TextField {...params} name='employee' 
-          variant='outlined' 
-          label='Employee'
-          fullWidth //try to put on same line as previous element
-          value={appointmentData.employee}/>}
-          onChange={(e) => setAppointmentData({...appointmentData, employee: e.target.value})}
-      />
-    </div>        
+                <FormControl fullWidth>
 
-{/*                 
-                <TextField  
-                name='employee' 
-                variant='outlined' 
-                label='Employee'
-                fullWidth
-                value={appointmentData.memberEmail}
-                onChange={(e) => setAppointmentData({...appointmentData, memberEmail: e.target.value})}
-                /> */}
+
+                <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Employee" 
+                    variant='outlined'
+                    fullWidth
+                    required
+                    //className={classes.select}
+                    value={appointmentData.employee}
+                    onChange={(e) => setAppointmentData({...appointmentData, employee: e.target.value})}
+                >
+                    <MenuItem value={'April May'}>April May</MenuItem>
+                    <MenuItem value={'Justin Case'}>Justin Case</MenuItem>
+                    <MenuItem value={'Janet Doe'}>Janet Doe</MenuItem>
+                </Select>
+                </FormControl>
+
                 
                 <TextField  
                 name='memberTitle' 
                 variant='outlined' 
                 label='Title eg. Mr Mrs'
                 fullWidth //try to put on same line as next element
+                required
                 value={appointmentData.memberTitle}
                 onChange={(e) => setAppointmentData({...appointmentData, memberTitle: e.target.value})}
                 />
@@ -125,6 +122,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 variant='outlined' 
                 label='Name'
                 fullWidth //try to put on same line as previous element
+                required
                 value={appointmentData.memberName}
                 onChange={(e) => setAppointmentData({...appointmentData, memberName: e.target.value})}
                 />
@@ -134,11 +132,12 @@ const Form = ({ currentId, setCurrentId }) => {
                 variant='outlined' 
                 label='Email'
                 fullWidth
+                required
                 value={appointmentData.memberEmail}
                 onChange={(e) => setAppointmentData({...appointmentData, memberEmail: e.target.value})}
                 />
 
-                <TextField  
+                {/* <TextField  
                 name='appointmentDate' 
                 variant='outlined' 
                 label='Appointment Date'
@@ -146,62 +145,55 @@ const Form = ({ currentId, setCurrentId }) => {
                 format="DD-MM-yyyy-HH"
                 value={appointmentData.appointmentDate}
                 onChange={(e) => setAppointmentData({...appointmentData, appointmentDate: e.target.value})}
-                />
+                /> */}
 
+                
+                
+                    {/* <TextField
+                        label="Choose Time"
+                        type="time"
+                        step="3600"
+                        //min="09:00" max="18:00"
+                                                InputLabelProps={{
+                        shrink: true,
+                        }}
+                        // 5 minutes
+                        inputProps={{
+                            min:"09:00",
+                        step: 3600,
+                        }}
+                    /> */}
+          
+                <TextField  
+                name='appointmentDate' 
+                variant='outlined' 
+                defaultValue="04:20"
+                fullWidth
+                required
+                type={'datetime-local'}
+                inputProps={{
+                    min:"2022-04-28T08:00",
+                    max:"2052-04-28T14:00",
+                    step: 3600,
+                    views: ["hours"],                                       
+                }}
+                value={appointmentData.appointmentDate}
+                onChange={(e) => setAppointmentData({...appointmentData, appointmentDate: e.target.value})}
+                />
+     
                 <TextField  
                 name='appointmentDescription' 
                 variant='outlined' 
                 label='Appointment Description'
                 fullWidth
                 multiline 
-                rows={4}
+                minRows={4}
+                required
                 value={appointmentData.appointmentDescription}
                 onChange={(e) => setAppointmentData({...appointmentData, appointmentDescription: e.target.value})}
-                />
+                />               
 
 
-                {/* <MuiPickersUtilsProvider utils={DateMomentUtils}>
-                    <KeyboardDateTimePicker  
-                    name='appointmentDate' 
-                    disablePast
-                    format="DD-MM-yyyy-HH"
-                    //ampm={false}
-                    minutesStep={60}
-                    views={["date", "hours"]}
-                    disableToolbar
-                    id="date-picker-dialog"
-                    error={false}
-                    helperText={'Ensure appointment is within operating hours'}
-                    value={appointmentData.appointmentDate}
-                    autoOk={true}
-                    onChange={(e) => setAppointmentData({...appointmentData, appointmentDate: e.target.value})}
-                    />
-                </MuiPickersUtilsProvider> */}
-
-{/* <KeyboardDateTimePicker
-        //variant="inline"
-        //ampm={false}
-        //label="appointmentDate"
-        //value={appointmentData.appointmentDate}
-        onChange={(e) => setAppointmentData({...appointmentData, appointmentDate: e.target.value})}
-        //onError={console.log}
-        //disablePast
-        //format="yyyy/MM/dd HH:mm"
-      /> */}
-    
-
-                {/*<TextField name='tags' variant='outlined' label='Tags' fullWidth value={appointmentData.tags} onChange={(e) => setAppointmentData({...appointmentData, tags: e.target.value.split(',') })}>
-
-                </TextField>*/}
-
-                <div className={classes.fileInput}>
-                    <Filebase 
-                        type='file'
-                        multiple={false}
-                        onDone={({base64}) => setAppointmentData ({...appointmentData, selectedFile: base64})}
-                    />
-                </div>
-          
 
                 <Button className={classes.buttonSubmit} variant='contained' color='primary' size='large' type='submit' fullWidth>Submit</Button>
                 {/*<Button variant='contained' color='secondary' size='small' onClick={clear} fullWidth>Clear</Button>*/}
