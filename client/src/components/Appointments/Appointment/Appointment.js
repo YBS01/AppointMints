@@ -60,13 +60,13 @@ const Appointment = ({ appointment, setCurrentId }) => {
                        <Availability/>
                     </Button>
 
-                    {(user?.resut?.googleId === appointment?.employee || user?.result?._id === appointment?.employee) && (
+                    {/* {(user?.resut?.googleId === appointment?.employee || user?.result?._id === appointment?.employee) && ( */}
 
                     <Button size='small' color='primary' onClick={() => dispatch(deleteAppointment(appointment._id)) }>
                         <DeleteIcon fontSize='small' />
                         Cancel
                     </Button>
-                    )} 
+                    {/* )}  */}
 
 
                     {/* <Button size='small' color='primary' onClick={() => dispatch(deleteAppointment(appointment._id)) }>
