@@ -22,9 +22,9 @@ const Appointment = ({ appointment, setCurrentId }) => {
         if (appointment.available.length > 0) {
           return appointment.available.find((available) => available === (user?.result?.googleId || user?.result?._id))
             ? (
-              <><EventAvailableIcon fontSize="small" />&nbsp;{appointment.available.length > 1 ? `You and ${appointment.available.length - 1} others` : `${appointment.available.length} you are available${appointment.available.length > 1 ? '' : ''}` }</>
+              <><EventAvailableIcon fontSize="small" />&nbsp;{appointment.available.length > 2 ? `You and ${appointment.available.length - 1} others` : `you are available ${appointment.available.length > 1 ? ' and 1 other' : ''}` }</>
             ) : (
-              <><EventAvailableTwoToneIcon fontSize="small" />&nbsp;{appointment.available.length} {appointment.available.length === 1 ? 'Someone is available' : 'Multiple persons are available'}</>
+              <><EventAvailableTwoToneIcon fontSize="small" />&nbsp;{appointment.available.length} {appointment.available.length === 1 ? 'person is available' : 'persons are available'}</>
             );
         }
     
