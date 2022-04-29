@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import decode from 'jwt-decode'
 
 const Navbar = () => {
     const classes = useStyles()
@@ -25,6 +26,14 @@ const Navbar = () => {
         const token = user?.token
 
         // JWT
+
+        if (token) {
+            const decodedToken = decode(token)
+
+            if(decodedToken.exp * 1000 < new Date().getTime()) logout()
+        } else {
+            
+        }
 
         setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
