@@ -27,6 +27,10 @@ app.use(cors())
 app.use('/appointments', appointmentRoutes)
 app.use('/user', userRoutes)
 
+app.get('/', (req, res) => {
+    res.send('Hello to AppointMints API')
+})
+
 //const CONNECTION_URL = 'mongodb+srv://AppointMe:WLMMeters24@cluster0.rndby.mongodb.net/AppointMints?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 
